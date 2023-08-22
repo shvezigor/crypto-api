@@ -6,7 +6,7 @@ export const router = express.Router();
 
 
 router.get('/', homePage);
-router('/cryptoapisverifydomain', verifyDomain);
+router.get('/cryptoapisverifydomain', verifyDomain);
 //router.get('/api/v1/crypt/getDipLink', getDipLink);
 //router.post('/api/v1/crypt/fileUpload', fileUpload);
 //router.post('/api/v1/crypt/sharingDocuments', sharingDocuments);
