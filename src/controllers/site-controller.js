@@ -8,6 +8,6 @@ export const  homePage = async (req, res)=>{
 
 export const  verifyDomain = async (req, res)=>{
     console.log("domain Verification")
-    res.send("cryptoapis-cb-84f442176185328f40da87be119f35192f5d96a6f0f0e31a0d101f2a758ca87e");
+    res.send("cryptoapis-cb-e7e776a8f6d62ca342717171bbf8764d288c838ce0082516a9d3f53d62f2237b");
     //res.json(data);
 }
