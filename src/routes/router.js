@@ -7,7 +7,7 @@ export const router = express.Router();
 
 router.get('/', homePage);
 router.get('/cryptoapisverifydomain', verifyDomain);
-router.get('/api/v1/crypt/minedTransaction', minedTransaction);
+router.post('/api/v1/crypt/minedTransaction', minedTransaction);
 
 //Mined Transaction
 //router.get('/api/v1/crypt/getDipLink', getDipLink);
