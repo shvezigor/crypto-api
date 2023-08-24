@@ -3,8 +3,10 @@
 export const  minedTransaction = async (req, res)=>{
     try {
         console.log("minedTransaction", req)
-        console.log("minedTransaction", res)
+        //console.log("minedTransaction", res)
 
+        const response = JSON.parse(req);
+        console.log("minedTransaction", response)
 
         let result = {};
 
