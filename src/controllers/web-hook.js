@@ -2,10 +2,10 @@
 
 export const  minedTransaction = async (req, res)=>{
     try {
-        console.log("minedTransaction", req)
+        console.log("minedTransaction", req.body)
         //console.log("minedTransaction", res)
 
-        const response = JSON.parse(req);
+        const response = JSON.parse(req.body);
         console.log("minedTransaction", response)
 
         let result = {};
