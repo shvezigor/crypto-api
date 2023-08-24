@@ -1,9 +1,9 @@
 
 
 export const  minedTransaction = async (req, res)=>{
-
     try {
         console.log("minedTransaction", req)
+        console.log("minedTransaction", res)
 
 
         let result = {};
