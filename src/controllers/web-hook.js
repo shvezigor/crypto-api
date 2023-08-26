@@ -24,7 +24,8 @@ export const creatNewAccount = async (req, res)=>{
         let message = "";
         const result = await get(account);
         if (result.length === 0) {
-            await insert(account.toLocaleLowerCase());
+            let result = await insert(account.toLocaleLowerCase());
+            console.log("result", result);
             message = `The account ${account} has been added successfully`;
         }else {
             message = `No account ${account} has been added`;
