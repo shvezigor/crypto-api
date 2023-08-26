@@ -1,5 +1,6 @@
 
 import conMySql from "./../db.js";
+import dotenv from 'dotenv';
 dotenv.config();
 
 export const  get = (id) => {
