@@ -22,17 +22,25 @@ export const creatNewAccount = async (req, res)=>{
         console.log('Running get Accounts', req.body);
         let account = req.body.id;
         let message = "";
+        let code = 200;
         const result = await get(account);
         if (result.length === 0) {
             let result = await insert(account.toLocaleLowerCase());
-            console.log("result", result);
-            message = `The account ${account} has been added successfully`;
+            if (result.affectedRows === 1){
+                console.log("result", result);
+                message = `The account ${account} has been added successfully`;
+            }else {
+                code = 400;
+                message = `The account ${account} has not been added`;
+            }
+
         }else {
+            code = 400;
             message = `No account ${account} has been added`;
         }
 
         const response = {
-            code: 200,
+            code: code,
             data: message
         };
 
