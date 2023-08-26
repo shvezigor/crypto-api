@@ -7,7 +7,7 @@ console.log(process.env.DATABASE_HOST, process.env.DATABASE_NAME, process.env.DA
 
 let conMySql = mysql.createConnection({
   host: process.env.DATABASE_HOST,
-  user: 'crypto',
+  user: process.env.DATABASE_NAME,
   password: 'Rtyueherfde198310!',
   database: 'tron',
   port: '3306'
