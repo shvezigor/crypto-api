@@ -15,7 +15,7 @@ let conMySql = mysql.createConnection({
 
 // Connect to Data Base
 conMySql.connect(function(err) {
-  console.log("connected db");
+  console.log("connected db", process.env.DATABASE_HOST, process.env.DATABASE_NAME, process.env.DATABASE_PORT, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD);
   if (err) throw err;
   
   // uses Data Base
