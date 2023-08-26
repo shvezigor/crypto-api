@@ -6,11 +6,13 @@ dotenv.config();
 var conMySql = mysql.createConnection({
   host: process.env.DATABASE_HOST,
   user: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD
+  password: process.env.DATABASE_PASSWORD,
+  database: 'tron'
 });
 
 // Connect to Data Base
 conMySql.connect(function(err) {
+  console.log("connected db");
   if (err) throw err;
   
   // uses Data Base
