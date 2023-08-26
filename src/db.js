@@ -5,8 +5,8 @@ dotenv.config();
 
 let conMySql = mysql.createConnection({
   host: 'localhost',
-  user: 'root',
-  password: '',
+  user: 'crypto',
+  password: 'Rtyueherfde198310!',
   database: 'sys',
   port:'3306',
 });
