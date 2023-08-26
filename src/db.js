@@ -7,7 +7,7 @@ let conMySql = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'tron',
+  database: 'sys',
   port:'3306',
 });
 
@@ -17,7 +17,7 @@ conMySql.connect(function(err) {
   if (err) throw err;
   
   // uses Data Base
-  conMySql.query("use tron", function (err, result) {
+  conMySql.query("use sys", function (err, result) {
     if (err) throw err;
   }); 
   
