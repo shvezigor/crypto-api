@@ -6,8 +6,7 @@ dotenv.config();
 var conMySql = mysql.createConnection({
   host: process.env.DATABASE_HOST,
   user: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD,
-  port: 3307
+  password: process.env.DATABASE_PASSWORD
 });
 
 // Connect to Data Base
