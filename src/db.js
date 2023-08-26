@@ -1,7 +1,8 @@
 import dotenv from 'dotenv';
+dotenv.config();
+
 import mysql from 'mysql2';
 
-dotenv.config();
 console.log(process.env.DATABASE_HOST, process.env.DATABASE_NAME, process.env.DATABASE_PORT, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD);
 
 let conMySql = mysql.createConnection({
