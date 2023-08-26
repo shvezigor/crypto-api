@@ -3,9 +3,9 @@ import mysql from 'mysql2';
 
 dotenv.config();
 
-var conMySql = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USERNAME,
+let conMySql = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
   password: '',
   database: 'tron',
   port:'3306',
