@@ -2,13 +2,14 @@ import dotenv from 'dotenv';
 import mysql from 'mysql2';
 
 dotenv.config();
+console.log(process.env.DATABASE_HOST, process.env.DATABASE_NAME, process.env.DATABASE_PORT, process.env.DATABASE_USERNAME, process.env.DATABASE_PASSWORD);
 
-var conMySql = mysql.createConnection({
+let conMySql = mysql.createConnection({
   host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USERNAME,
-  password: process.env.DATABASE_PASSWORD,
+  user: 'crypto',
+  password: 'Rtyueherfde198310!',
   database: 'tron',
-  port: process.env.DATABASE_PORT
+  port: '3306'
 });
 
 // Connect to Data Base
