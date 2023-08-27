@@ -28,9 +28,9 @@ export const creatNewAccount = async (req, res)=>{
         let code = 200;
         const result = await get(account);
         if (result.length === 0) {
-            let result = await insert(account.toLocaleLowerCase());
-            if (result.affectedRows === 1){
-                console.log("result", result);
+            let res = await insert(account.toLocaleLowerCase());
+            if (res.affectedRows === 1){
+                console.log("result", res);
                 const params = {
                     "context": "address-tokens-transactions-confirmed-each-confirmation",
                     "data": {
