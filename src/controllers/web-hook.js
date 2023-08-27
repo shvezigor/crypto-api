@@ -47,6 +47,7 @@ export const creatNewAccount = async (req, res)=>{
                 console.log("result", resultRequest.status);
                 if (resultRequest.status === 201){
                     console.log("result", resultRequest.data);
+                    console.log("result", resultRequest.data.item);
                     console.log("result", resultRequest.data.item.referenceId);
                     await update(account, resultRequest.data.item.referenceId);
                     message = `The account ${account} has been added successfully`;
