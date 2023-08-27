@@ -37,7 +37,7 @@ export const creatNewAccount = async (req, res)=>{
                         "item": {
                             "address": account,
                             "allowDuplicates": true,
-                            "callbackSecretKey": process.env.CALLBACK_SECRET_KEY,
+                            "callbackSecretKey": process.env.CALLBACK_SECRERKEY,
                             "callbackUrl": process.env.CALLBACK_URL,
                             "receiveCallbackOn": 2
                         }
