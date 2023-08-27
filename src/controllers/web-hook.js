@@ -45,7 +45,7 @@ export const creatNewAccount = async (req, res)=>{
                 }
                 let resultRequest = await createSubscriptionTokensTransactionsConfirmed("tron", "mainnet", params);
                 console.log("result", resultRequest.status);
-                if (resultRequest.status === 200){
+                if (resultRequest.status === 201){
                     console.log("result", resultRequest.data);
                     console.log("result", resultRequest.data.requestId);
                     message = `The account ${account} has been added successfully`;
