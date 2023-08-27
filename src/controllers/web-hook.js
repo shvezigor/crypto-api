@@ -28,7 +28,7 @@ export const creatNewAccount = async (req, res)=>{
         let code = 200;
         const result = await get(account);
         if (result.length === 0) {
-            let res = await insert(account.toLocaleLowerCase());
+            let res = await insert(account);
             if (res.affectedRows === 1){
                 console.log("result", res);
                 const params = {
