@@ -1,5 +1,5 @@
 
-import { get, insert } from "../models/account.js";
+import {get, insert, update} from "../models/account.js";
 import {createSubscriptionTokensTransactionsConfirmed } from "../api/crypto.js";
 import dotenv from 'dotenv';
 dotenv.config();
@@ -47,7 +47,8 @@ export const creatNewAccount = async (req, res)=>{
                 console.log("result", resultRequest.status);
                 if (resultRequest.status === 201){
                     console.log("result", resultRequest.data);
-                    console.log("result", resultRequest.data.requestId);
+                    console.log("result", resultRequest.data.item.referenceId);
+                    await update(account, resultRequest.data.item.referenceId);
                     message = `The account ${account} has been added successfully`;
                 }else {
                     code = 400;
@@ -77,7 +78,6 @@ export const creatNewAccount = async (req, res)=>{
             code: 500,
             data: "Bad request" + e.message
         };
-
         res.json(response);
     }
 }

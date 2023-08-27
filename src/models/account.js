@@ -20,3 +20,12 @@ export const insert = (id) => {
         });
     });
 }
+
+export const update = (id, value) => {
+    return new Promise((resolve, reject) => {
+        conMySql.query(`UPDATE accounts SET webhook = 1,  reference_id = "${value}" WHERE id = "${id}"`, function (err, result) {
+            if (err) reject(err.message);
+            resolve(result);
+        });
+    });
+}
