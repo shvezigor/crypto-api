@@ -43,12 +43,17 @@ export const creatNewAccount = async (req, res)=>{
                         }
                     }
                 }
-                let result = await createSubscriptionTokensTransactionsConfirmed("tron", "mainnet", params);
-                console.log("result", result);
-                if (result){
-                    // change account
+                let resultRequest = await createSubscriptionTokensTransactionsConfirmed("tron", "mainnet", params);
+                console.log("result", resultRequest.status);
+                if (resultRequest.status === 200){
+                    console.log("result", resultRequest.data);
+                    console.log("result", resultRequest.data.requestId);
+                    message = `The account ${account} has been added successfully`;
+                }else {
+                    code = 400;
+                    message = `The webhook for ${account} has not been created`;
                 }
-                message = `The account ${account} has been added successfully`;
+
             }else {
                 code = 400;
                 message = `The account ${account} has not been added`;
