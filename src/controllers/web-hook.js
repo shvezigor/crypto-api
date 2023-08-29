@@ -31,14 +31,17 @@ export const  tokensTransactionsConfirmed = async (req, res)=>{
 
        const address = req.body.data.item.address;
        const transactionId = req.body.data.item.transactionId;
+       const callbackSecretKey = req.body.data.item.callbackSecretKey
 
        console.log("address", address)
        console.log("transactionId", transactionId)
 
-       if (transactionId){
+       if (transactionId && callbackSecretKey === process.env.CALLBACK_SECRERKEY) {
            let  data = await getTransaction(transactionId);
            console.log("data", data)
            if (data.length === 0) {
+               const resAccount= await get(address);
+               console.log("resAccount", resAccount);
                /*const result = await insertTransaction(transactionId, address);
                if (result){
                    const resAccount= await get(address);
