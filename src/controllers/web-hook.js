@@ -1,6 +1,6 @@
 
 import {get, insert, update} from "../models/account.js";
-import {insertTransaction} from "../models/transactions.js";
+import {getTransaction, insertTransaction} from "../models/transactions.js";
 import {createSubscriptionTokensTransactionsConfirmed } from "../api/crypto.js";
 import {sendTransaction} from "../api/exwallet.js";
 
@@ -32,11 +32,18 @@ export const  tokensTransactionsConfirmed = async (req, res)=>{
        const address = req.body.data.item.address;
        const transactionId = req.body.data.item.transactionId;
 
+       console.log("address", address)
+       console.log("transactionId", transactionId)
+
        if (transactionId){
-           // send
-           const result = await insertTransaction(transactionId, address);
-           if (result){
-               await sendTransaction(transactionId);
+           let  data = await getTransaction(transactionId);
+           if (data.length === 0) {
+               /*const result = await insertTransaction(transactionId, address);
+               if (result){
+                   const resAccount= await get(address);
+                   console.log("resAccount", resAccount)
+                   await sendTransaction(transactionId, resAccount[0].callbackUrl);
+               }*/
            }
        }
 
