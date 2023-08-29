@@ -37,6 +37,7 @@ export const  tokensTransactionsConfirmed = async (req, res)=>{
 
        if (transactionId){
            let  data = await getTransaction(transactionId);
+           console.log("data", data)
            if (data.length === 0) {
                /*const result = await insertTransaction(transactionId, address);
                if (result){
