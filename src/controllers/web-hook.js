@@ -1,6 +1,9 @@
 
 import {get, insert, update} from "../models/account.js";
+import {insertTransaction} from "../models/transactions.js";
 import {createSubscriptionTokensTransactionsConfirmed } from "../api/crypto.js";
+import {sendTransaction} from "../api/exwallet.js";
+
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -20,15 +23,40 @@ export const  minedTransaction = async (req, res)=>{
     }
 }
 
+export const  tokensTransactionsConfirmed = async (req, res)=>{
+    try {
+        console.log("minedTransaction", req.body)
+        console.log("minedTransaction", req.body.data)
+        console.log("minedTransaction", req.body.data.item.transactionId)
+
+       const address = req.body.data.item.address;
+       const transactionId = req.body.data.item.transactionId;
+
+       if (transactionId){
+           // send
+           const result = await insertTransaction(transactionId, address);
+           if (result){
+               await sendTransaction(transactionId);
+           }
+       }
+
+        res.json(req.body.data.item.transactionId);
+    }catch (error) {
+        console.log(error);
+        res.json(error);
+    }
+}
+
 export const creatNewAccount = async (req, res)=>{
     try {
         console.log('Running get Accounts', req.body);
         let account = req.body.id;
+        let callbackUrl = req.body.callback_url;
         let message = "";
         let code = 200;
         const result = await get(account);
         if (result.length === 0) {
-            let res = await insert(account);
+            let res = await insert(account, callbackUrl);
             if (res.affectedRows === 1){
                 console.log("result", res);
                 const params = {

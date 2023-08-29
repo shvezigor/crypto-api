@@ -1,29 +1,29 @@
-
 import conMySql from "./../db.js";
 import dotenv from 'dotenv';
 dotenv.config();
 
-export const  get = (id) => {
+
+export const  getTransaction = (id) => {
     return new Promise((resolve, reject) => {
-        conMySql.query(`SELECT * FROM accounts where id = "${id}"`, function (err, result) {
+        conMySql.query(`SELECT * FROM transactions where id = "${id}"`, function (err, result) {
             if (err) reject(err.message);
             resolve(result);
         });
     });
 }
 
-export const insert = (id, callbackUrl) => {
+export const insertTransaction = (id, account) => {
     return new Promise((resolve, reject) => {
-        conMySql.query(`INSERT INTO accounts (id, callback_url) VALUES ("${id}", "${callbackUrl}")`, function (err, result) {
+        conMySql.query(`INSERT INTO transactions (id, account, export) VALUES ("${id}","${account}", 1)`, function (err, result) {
             if (err) throw console.log(err);
             resolve(result);
         });
     });
 }
 
-export const update = (id, value) => {
+export const updateTransaction = (id) => {
     return new Promise((resolve, reject) => {
-        conMySql.query(`UPDATE accounts SET webhook = 1,  reference_id = "${value}" WHERE id = "${id}"`, function (err, result) {
+        conMySql.query(`UPDATE transactions SET export = 1 WHERE id = "${id}"`, function (err, result) {
             if (err) reject(err.message);
             resolve(result);
         });
