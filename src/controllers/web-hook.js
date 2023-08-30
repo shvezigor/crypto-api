@@ -35,8 +35,10 @@ export const  tokensTransactionsConfirmed = async (req, res)=>{
 
        console.log("address", address)
        console.log("transactionId", transactionId)
+        console.log("callbackSecretKey", callbackSecretKey)
+        console.log("CALLBACK_SECRERKEY", process.env.CALLBACK_SECRERKEY)
 
-       if (transactionId && callbackSecretKey === process.env.CALLBACK_SECRERKEY) {
+       if (transactionId && (callbackSecretKey === process.env.CALLBACK_SECRERKEY)) {
            let  data = await getTransaction(transactionId);
            console.log("data", data)
            if (data.length === 0) {
