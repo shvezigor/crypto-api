@@ -1,13 +1,13 @@
-
 import {get, insert, update} from "../models/account.js";
 import {getTransaction, insertTransaction} from "../models/transactions.js";
-import {createSubscriptionTokensTransactionsConfirmed } from "../api/crypto.js";
+import {createSubscriptionTokensTransactionsConfirmed} from "../api/crypto.js";
 import {sendTransaction} from "../api/exwallet.js";
 
 import dotenv from 'dotenv';
+
 dotenv.config();
 
-export const  minedTransaction = async (req, res)=>{
+export const minedTransaction = async (req, res) => {
     try {
         console.log("minedTransaction", req.body)
         console.log("minedTransaction", req.body.data)
@@ -17,50 +17,48 @@ export const  minedTransaction = async (req, res)=>{
         //let result = {};
 
         res.json(req.body.data.item.transactionId);
-    }catch (error) {
+    } catch (error) {
         console.log(error);
         res.json(error);
     }
 }
 
-export const  tokensTransactionsConfirmed = async (req, res)=>{
+export const tokensTransactionsConfirmed = async (req, res) => {
     try {
         console.log("minedTransaction", req.body)
         console.log("minedTransaction", req.body.data)
         console.log("minedTransaction", req.body.data.item.transactionId)
 
-       const address = req.body.data.item.address;
-       const transactionId = req.body.data.item.transactionId;
-       const callbackSecretKey = req.body.data.item.callbackSecretKey
+        const address = req.body.data.item.address;
+        const transactionId = req.body.data.item.transactionId;
+        const callbackSecretKey = req.body.data.item.callbackSecretKey
 
-       console.log("address", address)
-       console.log("transactionId", transactionId)
+        console.log("address", address)
+        console.log("transactionId", transactionId)
         console.log("callbackSecretKey", callbackSecretKey)
-        console.log("CALLBACK_SECRERKEY", process.env.CALLBACK_SECRERKEY)
+        console.log("CALLBACK_SECRETKEY", process.env.CALLBACK_SECRETKEY)
 
-       if (transactionId && (callbackSecretKey === process.env.CALLBACK_SECRERKEY)) {
-           let  data = await getTransaction(transactionId);
-           console.log("data", data)
-           if (data.length === 0) {
-               const resAccount= await get(address);
-               console.log("resAccount", resAccount);
-               /*const result = await insertTransaction(transactionId, address);
-               if (result){
-                   const resAccount= await get(address);
-                   console.log("resAccount", resAccount)
-                   await sendTransaction(transactionId, resAccount[0].callbackUrl);
-               }*/
-           }
-       }
+        if (transactionId && (callbackSecretKey === process.env.CALLBACK_SECRETKEY)) {
+            let data = await getTransaction(transactionId);
+            console.log("data", data)
+            if (data.length === 0) {
+                const resAccount = await get(address);
+                const callbackURL = resAccount[0].callback_url;
+                console.log("callbackURL", callbackURL);
+                if (callbackURL) {
+                    await sendTransaction(transactionId, callbackURL);
+                }
+            }
+        }
 
         res.json(req.body.data.item.transactionId);
-    }catch (error) {
+    } catch (error) {
         console.log(error);
         res.json(error);
     }
 }
 
-export const creatNewAccount = async (req, res)=>{
+export const creatNewAccount = async (req, res) => {
     try {
         console.log('Running get Accounts', req.body);
         let account = req.body.id;
@@ -70,7 +68,7 @@ export const creatNewAccount = async (req, res)=>{
         const result = await get(account);
         if (result.length === 0) {
             let res = await insert(account, callbackUrl);
-            if (res.affectedRows === 1){
+            if (res.affectedRows === 1) {
                 console.log("result", res);
                 const params = {
                     "context": "address-tokens-transactions-confirmed-each-confirmation",
@@ -78,7 +76,7 @@ export const creatNewAccount = async (req, res)=>{
                         "item": {
                             "address": account,
                             "allowDuplicates": true,
-                            "callbackSecretKey": process.env.CALLBACK_SECRERKEY,
+                            "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
                             "callbackUrl": process.env.CALLBACK_URL,
                             "receiveCallbackOn": 2
                         }
@@ -86,21 +84,21 @@ export const creatNewAccount = async (req, res)=>{
                 }
                 let resultRequest = await createSubscriptionTokensTransactionsConfirmed("tron", "mainnet", params);
                 console.log("result", resultRequest.status);
-                if (resultRequest.status === 201){
+                if (resultRequest.status === 201) {
                     const referenceId = resultRequest.data.data.item.referenceId;
                     await update(account, referenceId);
                     message = `The account ${account} has been added successfully`;
-                }else {
+                } else {
                     code = 400;
                     message = `The webhook for ${account} has not been created`;
                 }
 
-            }else {
+            } else {
                 code = 400;
                 message = `The account ${account} has not been added`;
             }
 
-        }else {
+        } else {
             code = 400;
             message = `No account ${account} has been added`;
         }
