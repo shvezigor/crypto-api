@@ -31,7 +31,6 @@ export const tokensTransactionsConfirmed = async (req, res) => {
 
         const address = req.body.data.item.address;
         const transactionId = req.body.data.item.transactionId;
-        const callbackSecretKey = req.body.data.item.callbackSecretKey
 
         console.log("address", address)
         console.log("transactionId", transactionId)
