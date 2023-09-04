@@ -1,10 +1,10 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
-import {getTransaction, updateTransaction} from "../models/transactions.js";
+import {getTransaction, insertTransaction} from "../models/transactions.js";
 
 dotenv.config();
 
-export const sendTransaction = async (id, url) => {
+export const sendTransaction = async (id, account, url) => {
     try {
         console.log('running send');
         let params = {
@@ -14,7 +14,7 @@ export const sendTransaction = async (id, url) => {
         console.log('status', response.status);
         if (response.status === 200) {
             console.log("updateTransaction", id);
-            await updateTransaction(id);
+            await insertTransaction(id, account);
             return true;
         }
 
@@ -26,7 +26,7 @@ export const sendTransaction = async (id, url) => {
 }
 
 function sendData(url, params) {
-    return axios.post(process.env.API_SERVER + '/wallet-bscgate/webhook/qfjn3fc8wc9j2djska', params)
+    return axios.post(url, params)
         .then(function (response) {
             return response;
         })

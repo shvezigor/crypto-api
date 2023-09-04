@@ -44,7 +44,7 @@ export const tokensTransactionsConfirmed = async (req, res) => {
                 const callbackURL = resAccount[0].callback_url;
                 console.log("callbackURL", callbackURL);
                 if (callbackURL) {
-                    await sendTransaction(transactionId, callbackURL);
+                     await sendTransaction(transactionId, address, callbackURL);
                 }
             }
         }
