@@ -25,17 +25,18 @@ export const minedTransaction = async (req, res) => {
 
 export const tokensTransactionsConfirmed = async (req, res) => {
     try {
-        console.log("body", req.body)
-        console.log("data", req.body.data)
-        console.log("transactionId", req.body.data.item.transactionId)
+        //console.log("body", req.body)
+        //console.log("data", req.body.data)
+        //console.log("transactionId", req.body.data.item.transactionId)
 
-        const address = req.body.data.item.address;
+
         const transactionId = req.body.data.item.transactionId;
-
-        console.log("address", address)
         console.log("transactionId", transactionId)
+        const address = req.body.data.item.address;
+        console.log("address", address)
 
         if (transactionId) {
+            console.log("----transactionId", transactionId)
             let data = await getTransaction(transactionId);
             console.log("data", data)
             if (data.length === 0) {
