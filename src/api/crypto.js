@@ -22,6 +22,25 @@ export const createSubscriptionTokensTransactionsConfirmed = async (blockchain, 
         });
 }
 
+export const createSubscriptionTokensEachTransactionsConfirmed = async (blockchain, network, params) => {
+    const headers = {
+        "X-API-Key": process.env.API_KEYS,
+        "Content-Type": "application/json"
+    };
+
+    const url = process.env.API_SERVER + `/blockchain-events/${blockchain}/${network}/subscriptions/address-coins-transactions-confirmed-each-confirmation`;
+    return axios.post(url,
+        params,
+        { headers }  )
+        .then(function (response) {
+            return response;
+        })
+        .catch(function (error) {
+            console.log(error);
+            return error;
+        });
+}
+
 export const listSubscriptions = async (blockchain, network) => {
     const headers = {
         "X-API-Key": process.env.API_KEYS,

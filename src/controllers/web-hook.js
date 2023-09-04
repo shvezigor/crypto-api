@@ -25,9 +25,9 @@ export const minedTransaction = async (req, res) => {
 
 export const tokensTransactionsConfirmed = async (req, res) => {
     try {
-        console.log("minedTransaction", req.body)
-        console.log("minedTransaction", req.body.data)
-        console.log("minedTransaction", req.body.data.item.transactionId)
+        console.log("body", req.body)
+        console.log("data", req.body.data)
+        console.log("transactionId", req.body.data.item.transactionId)
 
         const address = req.body.data.item.address;
         const transactionId = req.body.data.item.transactionId;
@@ -35,8 +35,41 @@ export const tokensTransactionsConfirmed = async (req, res) => {
 
         console.log("address", address)
         console.log("transactionId", transactionId)
-        console.log("callbackSecretKey", callbackSecretKey)
-        console.log("CALLBACK_SECRETKEY", process.env.CALLBACK_SECRETKEY)
+
+        if (transactionId) {
+            let data = await getTransaction(transactionId);
+            console.log("data", data)
+            if (data.length === 0) {
+                const resAccount = await get(address);
+                const callbackURL = resAccount[0].callback_url;
+                console.log("callbackURL", callbackURL);
+                if (callbackURL) {
+                    await sendTransaction(transactionId, callbackURL);
+                }
+            }
+        }
+
+        res.json(req.body.data.item.transactionId);
+    } catch (error) {
+        console.log(error);
+        res.json(error);
+    }
+}
+
+export const tokensTransactionsEachConfirmed = async (req, res) => {
+    try {
+        console.log("body", req.body)
+        console.log("data", req.body.data)
+        console.log("transactionId", req.body.data.item.transactionId)
+
+        const address = req.body.data.item.address;
+        const transactionId = req.body.data.item.transactionId;
+        const callbackSecretKey = req.body.data.item.callbackSecretKey
+
+        console.log("address", address)
+        console.log("transactionId", transactionId)
+        //console.log("callbackSecretKey", callbackSecretKey)
+        //console.log("CALLBACK_SECRETKEY", process.env.CALLBACK_SECRETKEY)
 
         if (transactionId && (callbackSecretKey === process.env.CALLBACK_SECRETKEY)) {
             let data = await getTransaction(transactionId);
