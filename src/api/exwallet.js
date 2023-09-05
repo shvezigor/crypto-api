@@ -13,7 +13,7 @@ export const sendTransaction = async (id, account, url) => {
         const response = await sendData(url, params);
         console.log('status', response.status);
         if (response.status === 200) {
-            console.log("updateTransaction", id);
+            console.log("insertTransaction", id);
             await insertTransaction(id, account);
             return true;
         }
