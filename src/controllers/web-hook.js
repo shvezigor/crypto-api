@@ -99,6 +99,9 @@ export const creatNewAccount = async (req, res) => {
         let message = "";
         let code = 200;
         const result = await get(account);
+
+        console.log('result finc acount', result);
+
         if (result.length === 0) {
             let res = await insert(account, callbackUrl);
             if (res.affectedRows === 1) {
@@ -133,7 +136,7 @@ export const creatNewAccount = async (req, res) => {
 
         } else {
             code = 400;
-            message = `No account ${account} has been added`;
+            message = `The address ${account} has already been added before`;
         }
 
         const response = {
