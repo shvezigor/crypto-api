@@ -1,6 +1,6 @@
 import {get, insert, update} from "../models/account.js";
 import {getTransaction, insertTransaction} from "../models/transactions.js";
-import {createSubscriptionTokensTransactionsConfirmed} from "../api/crypto.js";
+import {createSubscriptionConfirm} from "../api/crypto.js";
 import {sendTransaction} from "../api/exwallet.js";
 
 import dotenv from 'dotenv';
@@ -118,7 +118,9 @@ export const creatNewAccount = async (req, res) => {
                         }
                     }
                 }
-                let resultRequest = await createSubscriptionTokensTransactionsConfirmed("tron", "mainnet", params);
+                createSubscriptionConfirm("tron", "mainnet", params);
+
+                /*let resultRequest = await createSubscription("tron", "mainnet", params);
                 console.log("result", resultRequest.status);
                 if (resultRequest.status === 201) {
                     const referenceId = resultRequest.data.data.item.referenceId;
@@ -127,7 +129,9 @@ export const creatNewAccount = async (req, res) => {
                 } else {
                     code = 400;
                     message = `The webhook for ${account} has not been created`;
-                }
+                }*/
+
+                message = `The account ${account} has been added successfully`;
 
             } else {
                 code = 400;
@@ -155,3 +159,5 @@ export const creatNewAccount = async (req, res) => {
         res.json(response);
     }
 }
+
+

@@ -1,7 +1,24 @@
 
 import axios from 'axios';
 import dotenv from 'dotenv';
+import {update} from "../models/account.js";
 dotenv.config();
+
+export const createSubscriptionConfirm = async (blockchain, network, params) => {
+    let  message;
+    let resultRequest = await createSubscriptionTokensTransactionsConfirmed(blockchain, network, params);
+    console.log("result", resultRequest.status);
+    if (resultRequest.status === 201) {
+        const referenceId = resultRequest.data.data.item.referenceId;
+        await update(account, referenceId);
+        message = `The account ${account} has been added successfully`;
+        console.log(message)
+    } else {
+        message = `The webhook for ${account} has not been created`;
+        console.log(message)
+    }
+}
+
 
 export const createSubscriptionTokensTransactionsConfirmed = async (blockchain, network, params) => {
     const headers = {
