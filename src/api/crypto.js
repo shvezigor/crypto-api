@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import {update} from "../models/account.js";
 dotenv.config();
 
-export const createSubscriptionConfirm = async (blockchain, network, params) => {
+export const createSubscriptionConfirm = async (account, blockchain, network, params) => {
     let  message;
     let resultRequest = await createSubscriptionTokensTransactionsConfirmed(blockchain, network, params);
     console.log("result", resultRequest.status);

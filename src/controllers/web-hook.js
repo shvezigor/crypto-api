@@ -118,7 +118,7 @@ export const creatNewAccount = async (req, res) => {
                         }
                     }
                 }
-                createSubscriptionConfirm("tron", "mainnet", params);
+                createSubscriptionConfirm(account, "tron", "mainnet", params);
 
                 /*let resultRequest = await createSubscription("tron", "mainnet", params);
                 console.log("result", resultRequest.status);
