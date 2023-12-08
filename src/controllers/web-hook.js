@@ -105,6 +105,7 @@ export const creatNewAccount = async (req, res) => {
 
         if (result.length === 0) {
             let res = await insert(account, callbackUrl);
+            console.log('res insert account', res);
             if (res.affectedRows === 1) {
                 console.log("result", res);
                 const params = {
@@ -145,7 +146,7 @@ export const creatNewAccount = async (req, res) => {
         console.log(e.message);
         const response = {
             code: 500,
-            data: "Bad request" + e.message
+            data: "Bad request " + e.message
         };
         res.json(response);
     }
