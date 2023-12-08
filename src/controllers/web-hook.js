@@ -100,7 +100,8 @@ export const creatNewAccount = async (req, res) => {
         let code = 200;
         const result = await get(account);
 
-        console.log('result finc acount', result);
+        console.log('account', account);
+        console.log('result find account', result);
 
         if (result.length === 0) {
             let res = await insert(account, callbackUrl);
@@ -119,20 +120,7 @@ export const creatNewAccount = async (req, res) => {
                     }
                 }
                 createSubscriptionConfirm(account, "tron", "mainnet", params);
-
-                /*let resultRequest = await createSubscription("tron", "mainnet", params);
-                console.log("result", resultRequest.status);
-                if (resultRequest.status === 201) {
-                    const referenceId = resultRequest.data.data.item.referenceId;
-                    await update(account, referenceId);
-                    message = `The account ${account} has been added successfully`;
-                } else {
-                    code = 400;
-                    message = `The webhook for ${account} has not been created`;
-                }*/
-
                 message = `The account ${account} has been added successfully`;
-
             } else {
                 code = 400;
                 message = `The account ${account} has not been added`;
@@ -141,12 +129,15 @@ export const creatNewAccount = async (req, res) => {
         } else {
             code = 400;
             message = `The address ${account} has already been added before`;
+            console.log(message);
         }
 
         const response = {
             code: code,
             data: message
         };
+
+        console.log(response);
 
         res.json(response);
 
