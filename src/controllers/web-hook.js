@@ -36,19 +36,28 @@ export const tokensTransactionsConfirmed = async (req, res) => {
         console.log("address", address)
 
         if (transactionId) {
-            console.log("----transactionId", transactionId)
-            let data = await getTransaction(transactionId);
-            console.log("data", data)
-            if (data.length === 0) {
+            try {
+                console.log("----transactionId", transactionId)
+                let data = await getTransaction(transactionId);
+                console.log("data", data)
+                if (data.length === 0) {
+                    const resAccount = await get(address);
+                    const callbackURL = resAccount[0].callback_url;
+                    console.log("callbackURL", callbackURL);
+                    if (callbackURL) {
+                        await sendTransaction(transactionId, address, callbackURL);
+                    }
+                }
+            }catch (e){
+                console.log("Error getTransaction", e)
                 const resAccount = await get(address);
                 const callbackURL = resAccount[0].callback_url;
                 console.log("callbackURL", callbackURL);
                 if (callbackURL) {
-                     await sendTransaction(transactionId, address, callbackURL);
+                    await sendTransaction(transactionId, address, callbackURL);
                 }
             }
         }
-
         res.json(req.body.data.item.transactionId);
     } catch (error) {
         console.log(error);
