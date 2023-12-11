@@ -107,7 +107,14 @@ export const creatNewAccount = async (req, res) => {
         let callbackUrl = req.body.callback_url;
         let message = "";
         let code = 200;
-        const result = await get(account);
+        let result;
+        console.log('account', account);
+
+        try {
+            result = await get(account);
+        }catch (e){
+            console.log("Error check account", e);
+        }
 
         console.log('account', account);
         console.log('result find account', result);
