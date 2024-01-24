@@ -1,6 +1,6 @@
 
 import express from 'express';
-import {deleteSubscription, homePage, verifyDomain} from "../controllers/site-controller.js";
+import {homePage, verifyDomain} from "../controllers/site-controller.js";
 import {
     minedTransaction,
     tokensTransactionsConfirmed,
