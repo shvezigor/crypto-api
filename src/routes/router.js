@@ -1,7 +1,12 @@
 
 import express from 'express';
-import { homePage, verifyDomain } from "../controllers/site-controller.js";
-import { minedTransaction, tokensTransactionsConfirmed, creatNewAccount } from "../controllers/web-hook.js";
+import {deleteSubscription, homePage, verifyDomain} from "../controllers/site-controller.js";
+import {
+    minedTransaction,
+    tokensTransactionsConfirmed,
+    creatNewAccount,
+    deleteSubscribeByAccount
+} from "../controllers/web-hook.js";
 export const router = express.Router();
 
 
@@ -12,6 +17,9 @@ router.post('/api/v1/crypt/account', creatNewAccount);
 
 router.post('/api/v1/crypt/minedTransaction', minedTransaction);
 router.post('/api/v1/crypt/tokensTransactionsConfirmed', tokensTransactionsConfirmed);
+
+
+router.post('/api/v1/crypt/deletedTransaction', deleteSubscribeByAccount);
 
 
 
