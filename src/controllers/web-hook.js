@@ -1,6 +1,6 @@
 import {get, insert, update} from "../models/account.js";
 import {getTransaction, insertTransaction} from "../models/transactions.js";
-import {createSubscriptionConfirm} from "../api/crypto.js";
+import {createSubscriptionConfirm, deleteSubscriptions} from "../api/crypto.js";
 import {sendTransaction} from "../api/exwallet.js";
 
 import dotenv from 'dotenv';
@@ -48,7 +48,7 @@ export const tokensTransactionsConfirmed = async (req, res) => {
                         await sendTransaction(transactionId, address, callbackURL);
                     }
                 }
-            }catch (e){
+            } catch (e) {
                 console.log("Error getTransaction", e)
                 const resAccount = await get(address);
                 const callbackURL = resAccount[0].callback_url;
@@ -112,7 +112,7 @@ export const creatNewAccount = async (req, res) => {
 
         try {
             result = await get(account);
-        }catch (e){
+        } catch (e) {
             console.log("Error check account", e);
         }
 
@@ -167,5 +167,39 @@ export const creatNewAccount = async (req, res) => {
         res.json(response);
     }
 }
+
+export const deleteSubscribeByAccount = async (req, res) => {
+    try {
+        console.log('Running delete Subscribe By Account', req.body);
+        let referenceId = req.body.id;
+        let code = 200;
+        console.log('account', account);
+
+        let message = "";
+        console.log('account', account);
+        console.log('result find account', result);
+
+        deleteSubscriptions("tron", "mainnet", referenceId);
+        message = `The account ${account} has been deleted successfully`;
+
+        const response = {
+            code: code,
+            data: message
+        };
+
+        console.log(response);
+
+        res.json(response);
+
+    } catch (e) {
+        console.log(e.message);
+        const response = {
+            code: 500,
+            data: "Bad request " + e.message
+        };
+        res.json(response);
+    }
+}
+
 
 
