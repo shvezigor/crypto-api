@@ -106,7 +106,7 @@ export const creatNewAccount = async (req, res) => {
         let account = req.body.id;
         let callbackUrl = req.body.callback_url;
         let message = "";
-        let code = 200;
+        let code;
         let result;
         console.log('account', account);
 
@@ -137,6 +137,7 @@ export const creatNewAccount = async (req, res) => {
                     }
                 }
                 await createSubscriptionConfirm(account, "tron", "mainnet", params);
+                code = 200;
                 message = `The account ${account} has been added successfully`;
             } else {
                 code = 400;
