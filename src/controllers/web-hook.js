@@ -136,7 +136,7 @@ export const creatNewAccount = async (req, res) => {
                         }
                     }
                 }
-                createSubscriptionConfirm(account, "tron", "mainnet", params);
+                await createSubscriptionConfirm(account, "tron", "mainnet", params);
                 message = `The account ${account} has been added successfully`;
             } else {
                 code = 400;
