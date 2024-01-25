@@ -136,18 +136,47 @@ export const creatNewAccount = async (req, res) => {
                         }
                     }
                 }
-                await createSubscriptionConfirm(account, "tron", "mainnet", params);
-                code = 200;
-                message = `The account ${account} has been added successfully`;
+                let resCreateSubscribe = await createSubscriptionConfirm(account, "tron", "mainnet", params);
+                if (resCreateSubscribe){
+                    code = 200;
+                    message = `The account ${account} has been added successfully`;
+                } else {
+                    code = 400;
+                    message = `he account ${account} has not been added`;
+                }
             } else {
                 code = 400;
                 message = `The account ${account} has not been added`;
             }
 
         } else {
-            code = 400;
-            message = `The address ${account} has already been added before`;
-            console.log(message);
+            if (result[0].reference_id === 0){
+                const params = {
+                    "context": "address-tokens-transactions-confirmed-each-confirmation",
+                    "data": {
+                        "item": {
+                            "address": account,
+                            "allowDuplicates": true,
+                            "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
+                            "callbackUrl": process.env.CALLBACK_URL,
+                            "receiveCallbackOn": 2
+                        }
+                    }
+                }
+
+                let resCreateSubscribe = await createSubscriptionConfirm(account, "tron", "mainnet", params);
+                if (resCreateSubscribe){
+                    code = 200;
+                    message = `The account ${account} has been added successfully`;
+                } else {
+                    code = 400;
+                    message = `he account ${account} has not been added`;
+                }
+            }else {
+                code = 400;
+                message = `The address ${account} has already been added before`;
+                console.log(message);
+            }
         }
 
         const response = {

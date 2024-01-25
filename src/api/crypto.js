@@ -13,9 +13,11 @@ export const createSubscriptionConfirm = async (account, blockchain, network, pa
         await update(account, referenceId);
         message = `The account ${account} has been added successfully`;
         console.log(message)
+        return true;
     } else {
         message = `The webhook for ${account} has not been created`;
         console.log(message)
+        return false;
     }
 }
 
