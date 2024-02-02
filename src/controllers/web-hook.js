@@ -114,6 +114,12 @@ export const creatNewAccount = async (req, res) => {
             result = await get(account);
         } catch (e) {
             console.log("Error check account", e);
+            console.log(e.message);
+            const response = {
+                code: 500,
+                data: "1. Bad request " + e.message
+            };
+            res.json(response);
         }
 
         console.log('account', account);
@@ -142,11 +148,11 @@ export const creatNewAccount = async (req, res) => {
                     message = `The account ${account} has been added successfully`;
                 } else {
                     code = 400;
-                    message = `he account ${account} has not been added`;
+                    message = `2. The account ${account} has not been added`;
                 }
             } else {
                 code = 400;
-                message = `The account ${account} has not been added`;
+                message = `3. The account ${account} has not been added`;
             }
 
         } else {
@@ -170,11 +176,11 @@ export const creatNewAccount = async (req, res) => {
                     message = `The account ${account} has been added successfully`;
                 } else {
                     code = 400;
-                    message = `he account ${account} has not been added`;
+                    message = `4. The account ${account} has not been added`;
                 }
             }else {
                 code = 400;
-                message = `The address ${account} has already been added before`;
+                message = `5. The address ${account} has already been added before`;
                 console.log(message);
             }
         }
@@ -192,7 +198,7 @@ export const creatNewAccount = async (req, res) => {
         console.log(e.message);
         const response = {
             code: 500,
-            data: "Bad request " + e.message
+            data: "6. Bad request " + e.message
         };
         res.json(response);
     }
