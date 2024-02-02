@@ -105,12 +105,14 @@ export const creatNewAccount = async (req, res) => {
         console.log('Running get Accounts', req.body);
         let account = req.body.id;
         let callbackUrl = req.body.callback_url;
+        let expiredTime = '1706885649'; //req.body.expired_time;
         let message = "";
         let code;
         let result;
         console.log('account', account);
 
         try {
+
             result = await get(account);
         } catch (e) {
             console.log("Error check account", e);
@@ -126,7 +128,8 @@ export const creatNewAccount = async (req, res) => {
         console.log('result find account', result);
 
         if (result.length === 0) {
-            let res = await insert(account, callbackUrl);
+            expiredTime = convertUnixTimestampToDateTime(expiredTime);
+            let res = await insert(account, expiredTime, callbackUrl);
             console.log('res insert account', res);
             if (res.affectedRows === 1) {
                 console.log("result", res);
@@ -238,5 +241,19 @@ export const deleteSubscribeByAccount = async (req, res) => {
     }
 }
 
+function convertUnixTimestampToDateTime(unixTimestamp) {
+    const date = new Date(unixTimestamp * 1000);
+
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+
+    return formattedDate;
+}
 
 
