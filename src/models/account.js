@@ -14,7 +14,7 @@ export const  get = (id) => {
 
 export const insert = (id, expiredTime, callbackUrl) => {
     return new Promise((resolve, reject) => {
-        conMySql.query(`INSERT INTO accounts (id, expired_time, callback_url) VALUES ("${id}", "${callbackUrl}", ${expiredTime})`, function (err, result) {
+        conMySql.query(`INSERT INTO accounts (id, callback_url, expired_time) VALUES ("${id}", "${callbackUrl}", ${expiredTime})`, function (err, result) {
             if (err) throw console.log(err);
             resolve(result);
         });
