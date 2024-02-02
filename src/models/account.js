@@ -20,6 +20,14 @@ export const insert = (id, callbackUrl) => {
         });
     });
 }
+export const insertBody = (body) => {
+    return new Promise((resolve, reject) => {
+        conMySql.query(`INSERT INTO logs (data) VALUES ("${body}")`, function (err, result) {
+            if (err) throw console.log(err);
+            resolve(result);
+        });
+    });
+}
 
 export const update = (id, value) => {
     return new Promise((resolve, reject) => {

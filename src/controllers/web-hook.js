@@ -1,4 +1,4 @@
-import {get, insert, update} from "../models/account.js";
+import {get, insert, insertBody, update} from "../models/account.js";
 import {getTransaction, insertTransaction} from "../models/transactions.js";
 import {createSubscriptionConfirm, deleteSubscriptions} from "../api/crypto.js";
 import {sendTransaction} from "../api/exwallet.js";
@@ -196,6 +196,7 @@ export const creatNewAccount = async (req, res) => {
 
     } catch (e) {
         console.log(e.message);
+        insertBody(req.body);
         const response = {
             code: 500,
             data: "6. Bad request " + e.message
