@@ -1,7 +1,7 @@
 
 import dotenv from 'dotenv';
 import nodeCron from 'node-cron';
-import {getExpiredTime} from "./models/account.js";
+import {getExpiredTime, deletedAccount} from "./models/account.js";
 import {deleteSubscriptions} from "./api/crypto.js";
 
 dotenv.config();
@@ -21,13 +21,32 @@ nodeCron.schedule('* * * * *', async () => {
         const formattedDate = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
         console.log(formattedDate);
 
-        let result = await getExpiredTime(formattedDate);
+        getExpiredTime(formattedDate)
+            .then(result => {
+                // Обробка результату, якщо записи існують
+                if (result.length > 0) {
+                    results.forEach(row => {
+                        console.log(`ID: ${row.reference_id}`);
+                        deleteSubscriptions("tron", "mainnet", row.reference_id);
+                        deletedAccount(row.reference_id);
+                    });
+                } else {
+                    console.log('Немає записів в результаті запиту.');
+                }
+            })
+            .catch(error => {
+                // Обробка помилки
+                console.error('Помилка при виконанні запиту:', error);
+            });
+
+
+        /*let result = await getExpiredTime(formattedDate);
         if (result.length !== 0) {
             results.forEach(row => {
                 console.log(`ID: ${row.reference_id}`);
                 deleteSubscriptions("tron", "mainnet", row.reference_id);
             });
-        }
+        }*/
     } catch (e) {
         console.log(e.message);
     }

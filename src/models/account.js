@@ -43,3 +43,12 @@ export const update = (id, value) => {
         });
     });
 }
+
+export const deletedAccount = (id) => {
+    return new Promise((resolve, reject) => {
+        conMySql.query(`UPDATE accounts SET deleted = 1 WHERE reference_id = "${id}"`, function (err, result) {
+            if (err) reject(err.message);
+            resolve(result);
+        });
+    });
+}
