@@ -105,14 +105,13 @@ export const creatNewAccount = async (req, res) => {
         console.log('Running get Accounts', req.body);
         let account = req.body.id;
         let callbackUrl = req.body.callback_url;
-        let expiredTime = '1706885649'; //req.body.expired_time;
+        let expiredTime = req.body.expired_time;
         let message = "";
         let code;
         let result;
         console.log('account', account);
 
         try {
-
             result = await get(account);
         } catch (e) {
             console.log("Error check account", e);
@@ -128,7 +127,13 @@ export const creatNewAccount = async (req, res) => {
         console.log('result find account', result);
 
         if (result.length === 0) {
-            expiredTime = convertUnixTimestampToDateTime(expiredTime);
+
+            if (expiredTime != 0){
+                expiredTime = convertUnixTimestampToDateTime(expiredTime);
+            }else {
+                expiredTime = convertUnixTimestampToDateTime(1833185706);
+            }
+
             let res = await insert(account, expiredTime, callbackUrl);
             console.log('res insert account', res);
             if (res.affectedRows === 1) {
