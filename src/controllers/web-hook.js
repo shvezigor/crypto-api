@@ -128,7 +128,7 @@ export const creatNewAccount = async (req, res) => {
 
         if (result.length === 0) {
 
-            if (expiredTime != 0){
+            if (expiredTime !== 0){
                 expiredTime = convertUnixTimestampToDateTime(expiredTime);
             }else {
                 expiredTime = convertUnixTimestampToDateTime(1833185706);
