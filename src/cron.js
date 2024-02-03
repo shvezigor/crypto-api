@@ -25,7 +25,36 @@ nodeCron.schedule('* * * * *', async () => {
             .then(result => {
                 // Обробка результату, якщо записи існують
                 if (result.length > 0) {
-                    results.forEach(row => {
+                    // Отримуємо масив обіцянок для всіх викликів deleteSubscriptions
+                    const deletePromises = result.map(row => {
+                        console.log(`ID: ${row.reference_id}`);
+                        // Повертаємо обіцянку для deleteSubscriptions
+                        return deleteSubscriptions("tron", "mainnet", row.reference_id)
+                            .then(() => deletedAccount(row.reference_id))
+                            .catch(error => {
+                                console.error(`Помилка при викликанні deleteSubscriptions для ID: ${row.reference_id}`, error);
+                                // Повертаємо обіцянку для deletedAccount в будь-якому випадку
+                                return deletedAccount(row.reference_id);
+                            });
+                    });
+
+                    // Використовуємо Promise.all для очікування виконання всіх deleteSubscriptions та deletedAccount
+                    return Promise.all(deletePromises);
+                } else {
+                    console.log('Немає записів в результаті запиту.');
+                }
+            })
+            .catch(error => {
+                // Обробка помилки
+                console.error('Помилка при виконанні запиту:', error);
+            });
+
+
+       /* getExpiredTime(formattedDate)
+            .then(result => {
+                // Обробка результату, якщо записи існують
+                if (result.length > 0) {
+                    result.forEach(row => {
                         console.log(`ID: ${row.reference_id}`);
                         deleteSubscriptions("tron", "mainnet", row.reference_id);
                         deletedAccount(row.reference_id);
@@ -37,16 +66,8 @@ nodeCron.schedule('* * * * *', async () => {
             .catch(error => {
                 // Обробка помилки
                 console.error('Помилка при виконанні запиту:', error);
-            });
+            });*/
 
-
-        /*let result = await getExpiredTime(formattedDate);
-        if (result.length !== 0) {
-            results.forEach(row => {
-                console.log(`ID: ${row.reference_id}`);
-                deleteSubscriptions("tron", "mainnet", row.reference_id);
-            });
-        }*/
     } catch (e) {
         console.log(e.message);
     }
