@@ -6,7 +6,7 @@ import {deleteSubscriptions} from "./api/crypto.js";
 
 dotenv.config();
 
-nodeCron.schedule('0 0 * * *', async () => {
+nodeCron.schedule('* * * * *', async () => {
     try {
        console.log("Start cron deactivated subscribe by address.")
         const currentDate = new Date();
