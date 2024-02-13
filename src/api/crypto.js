@@ -85,6 +85,8 @@ export const deleteSubscriptions = async (blockchain, network, referenceId) => {
     };
 
     const url = process.env.API_SERVER + `/blockchain-events/${blockchain}/${network}/subscriptions/${referenceId}`;
+    console.log("url", url, headers);
+
     return axios.delete(url,
         { headers }  )
         .then(function (response) {

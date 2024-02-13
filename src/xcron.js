@@ -24,7 +24,6 @@ nodeCron.schedule('* * * * *', async () => {
                     console.log(`ID: ${row.reference_id}`);
                     let resRequest = await deleteSubscriptions("tron", "mainnet", row.reference_id);
                     console.log("resRequest", resRequest);
-                    console.log("resRequest", resRequest);
                     if (resRequest) {
                         console.log("Deleted", row.reference_id)
                         await deletedAccount(row.reference_id);
