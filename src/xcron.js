@@ -29,7 +29,7 @@ nodeCron.schedule('* * * * *', async () => {
                         await deletedAccount(row.reference_id);
                     }
                 } catch (error) {
-                    console.error(`Error processing ID: ${row.reference_id}`, error);
+                    console.error(`Error processing ID: ${row.reference_id}`, error.data);
                 }
             });
         } else {
