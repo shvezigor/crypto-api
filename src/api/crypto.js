@@ -88,10 +88,11 @@ export const deleteSubscriptions = async (blockchain, network, referenceId) => {
     return axios.delete(url,
         { headers }  )
         .then(function (response) {
-            return response;
+            console.log("response", response);
+            return true;
         })
         .catch(function (error) {
             //console.log(error);
-            return error;
+            return false;
         });
 }
