@@ -15,25 +15,27 @@ nodeCron.schedule('* * * * *', async () => {
         console.log(formattedDate);
 
         const result = await getExpiredTime(formattedDate);
+        console.log("result", result.length);
 
         if (result.length > 0) {
-            const deletePromises = result.map(async (row) => {
+            console.log("Start map")
+            result.map(async (row) => {
                 try {
                     console.log(`ID: ${row.reference_id}`);
                     let resRequest = await deleteSubscriptions("tron", "mainnet", row.reference_id);
+                    console.log("resRequest", resRequest);
                     if (resRequest) {
                         console.log("Deleted", row.reference_id)
                         await deletedAccount(row.reference_id);
                     }
                 } catch (error) {
-                    console.error(`Error processing ID: ${row.reference_id}`, error);
+                    console.error(`Error processing ID: ${row.reference_id}`, error.data);
                 }
             });
-
-            await Promise.all(deletePromises);
         } else {
             console.log('No records found in the query result.');
         }
+
     } catch (e) {
         console.error(e.message);
     }
