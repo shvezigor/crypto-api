@@ -19,6 +19,16 @@ export const  getExpiredTime = (currentTime) => {
         });
     });
 }
+
+export const  getExpiredTimeDeleted = (currentTime) => {
+    return new Promise((resolve, reject) => {
+        conMySql.query(`SELECT * FROM accounts where expired_time  < "${currentTime}" and deleted = 1`, function (err, result) {
+            if (err) reject(err.message);
+            resolve(result);
+        });
+    });
+}
+
 export const insert = (id, expiredTime, callbackUrl) => {
     return new Promise((resolve, reject) => {
         conMySql.query(`INSERT INTO accounts (id, callback_url, expired_time) VALUES ("${id}", "${callbackUrl}", "${expiredTime}")`, function (err, result) {
