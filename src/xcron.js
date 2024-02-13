@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import nodeCron from 'node-cron';
-import { getExpiredTime, deletedAccount } from "./models/account.js";
+import {getExpiredTime, deletedAccount, getExpiredTimeDeleted} from "./models/account.js";
 import { deleteSubscriptions } from "./api/crypto.js";
 
 dotenv.config();
@@ -14,7 +14,7 @@ nodeCron.schedule('* * * * *', async () => {
 
         console.log(formattedDate);
 
-        const result = await getExpiredTime(formattedDate);
+        const result = await getExpiredTimeDeleted(formattedDate);
 
         if (result.length > 0) {
             const deletePromises = result.map(async (row) => {
@@ -22,6 +22,7 @@ nodeCron.schedule('* * * * *', async () => {
                     console.log(`ID: ${row.reference_id}`);
                     let resRequest = await deleteSubscriptions("tron", "mainnet", row.reference_id);
                     if (resRequest) {
+                        console.log("Deleted", row.reference_id)
                         await deletedAccount(row.reference_id);
                     }
                 } catch (error) {
