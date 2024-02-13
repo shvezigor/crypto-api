@@ -91,7 +91,7 @@ export const deleteSubscriptions = async (blockchain, network, referenceId) => {
             return response;
         })
         .catch(function (error) {
-            console.log(error);
+            //console.log(error);
             return error;
         });
 }
