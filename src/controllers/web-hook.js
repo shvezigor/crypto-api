@@ -145,8 +145,7 @@ export const creatNewAccount = async (req, res) => {
                             "address": account,
                             "allowDuplicates": true,
                             "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
-                            "callbackUrl": process.env.CALLBACK_URL,
-                            "receiveCallbackOn": 2
+                            "callbackUrl": process.env.CALLBACK_URL
                         }
                     }
                 }
