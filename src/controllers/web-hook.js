@@ -111,9 +111,9 @@ export const creatNewAccount = async (req, res) => {
         let result;
         console.log('account', account);
 
-        if (callbackUrl.includes('api.eexwallet.com')) {
+        /*if (callbackUrl.includes('api.eexwallet.com')) {
             callbackUrl = callbackUrl.replace('api.eexwallet.com', 'service.transferland.io');
-        }
+        }*/
 
         console.log(callbackUrl);
 
