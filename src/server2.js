@@ -10,7 +10,7 @@ const PORT = 3130;
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: ['http://localhost:8181', 'http://18.159.26.145/'],
+    origin: ['http://localhost:3130', 'http://18.159.26.145/'],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
