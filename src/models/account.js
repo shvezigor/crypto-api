@@ -49,6 +49,21 @@ export const insert = (id, expiredTime, callbackUrl) => {
         });
     });
 }
+
+export const updateReferenceById = (id, newReferenceId) => {
+    return new Promise((resolve, reject) => {
+        const query = `UPDATE accounts SET reference_id = ? WHERE id = ?`;
+        conMySql.query(query, [newReferenceId, id], function (err, result) {
+            if (err) {
+                reject(err.message); // Якщо сталася помилка, відхиляємо Promise з повідомленням про помилку
+            } else {
+                resolve(result); // Успішно розв'язуємо Promise з результатом запиту
+            }
+        });
+    });
+}
+
+
 export const insertBody = (body) => {
     return new Promise((resolve, reject) => {
         conMySql.query(`INSERT INTO logs (data) VALUES ("${body}")`, function (err, result) {
