@@ -51,7 +51,7 @@ async function processActiveAccounts() {
 //processActiveAccounts();
 
 
-const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet");
+const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "0168f943-f685-4b00-acbf-b18b067afc4e");
 console.log("delResSubscribe", delResSubscribe);
 
 const params = {
@@ -71,4 +71,4 @@ const resCreateSubscribe = await createSubscriptionConfirm(account, "tron", "mai
 console.log("resCreateSubscribe", resCreateSubscribe);
 const referenceId = resCreateSubscribe.data.data.item.referenceId;
 
-update(account.id,referenceId);
+update("T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet",referenceId);
