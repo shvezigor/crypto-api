@@ -67,7 +67,7 @@ const params = {
 };
 
 // Виконання createSubscriptionConfirm асинхронно і чекаємо результат
-const resCreateSubscribe = await createSubscriptionConfirm(account, "tron", "mainnet", params);
+const resCreateSubscribe = await createSubscriptionConfirm("T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet", "tron", "mainnet", params);
 console.log("resCreateSubscribe", resCreateSubscribe);
 const referenceId = resCreateSubscribe.data.data.item.referenceId;
 
