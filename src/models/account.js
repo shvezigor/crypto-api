@@ -20,6 +20,18 @@ export const  getExpiredTime = (currentTime) => {
     });
 }
 
+export const selectActiveAccounts = () => {
+    return new Promise((resolve, reject) => {
+        conMySql.query(`SELECT * FROM accounts WHERE deleted = 0`, (err, result) => {
+            if (err) {
+                reject(err.message);
+            } else {
+                resolve(result);
+            }
+        });
+    });
+}
+
 export const  getExpiredTimeDeleted = (currentTime) => {
     return new Promise((resolve, reject) => {
         conMySql.query(`SELECT * FROM accounts where expired_time  < "${currentTime}" and deleted = 1`, function (err, result) {
