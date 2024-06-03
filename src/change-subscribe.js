@@ -12,8 +12,8 @@ async function processActiveAccounts() {
         await Promise.all(accounts.map(async (account) => {
             try {
                 // Виконання deleteSubscriptions асинхронно і чекаємо результат
-                console.log("account", account);
-                console.log("reference_id", account.reference_id);
+                //console.log("account", account);
+                //console.log("reference_id", account.reference_id);
                 //const delResSubscribe = await deleteSubscriptions("tron", "mainnet", account.reference_id);
                 const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet");
                 console.log("delResSubscribe", delResSubscribe);
