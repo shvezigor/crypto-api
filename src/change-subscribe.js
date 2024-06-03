@@ -47,4 +47,28 @@ async function processActiveAccounts() {
 }
 
 // Виклик асинхронної функції
-processActiveAccounts();
+//processActiveAccounts();
+//processActiveAccounts();
+
+
+const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet");
+console.log("delResSubscribe", delResSubscribe);
+
+const params = {
+    "context": "address-tokens-transactions-confirmed-each-confirmation",
+    "data": {
+        "item": {
+            "address": account.id,
+            "allowDuplicates": true,
+            "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
+            "callbackUrl": process.env.CALLBACK_URL_2
+        }
+    }
+};
+
+// Виконання createSubscriptionConfirm асинхронно і чекаємо результат
+const resCreateSubscribe = await createSubscriptionConfirm(account, "tron", "mainnet", params);
+console.log("resCreateSubscribe", resCreateSubscribe);
+const referenceId = resCreateSubscribe.data.data.item.referenceId;
+
+update(account.id,referenceId);
