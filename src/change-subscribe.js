@@ -58,7 +58,7 @@ const params = {
     "context": "address-tokens-transactions-confirmed-each-confirmation",
     "data": {
         "item": {
-            "address": account.id,
+            "address": "T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet",
             "allowDuplicates": true,
             "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
             "callbackUrl": process.env.CALLBACK_URL_2
