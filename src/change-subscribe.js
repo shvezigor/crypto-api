@@ -1,4 +1,4 @@
-import {selectActiveAccounts, update, updateReferenceById} from "./models/account.js";
+ import {selectActiveAccounts, update, updateReferenceById} from "./models/account.js";
 import { createSubscriptionConfirm, deleteSubscriptions } from "./api/crypto.js";
 import dotenv from 'dotenv';
 
@@ -60,7 +60,7 @@ const params = {
         "item": {
             "address": "TCAirSsKZy6Z4HuXvYaZGyeksy4iQbQqjt",
             "allowDuplicates": true,
-            "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
+            "callbackSecretKey": "secret",
             "callbackUrl": "https://node-service.bettertransfer.io/api/v1/crypt/tokensTransactionsConfirmed"
         }
     }
