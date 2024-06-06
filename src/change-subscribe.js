@@ -51,7 +51,7 @@ async function processActiveAccounts() {
 //processActiveAccounts();
 
 
-const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "51563010-5c33-438e-bf2e-6ed724d34aed");
+const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "c34e2a1e-180b-4e3b-8895-069aebf5f181");
 console.log("delResSubscribe", delResSubscribe);
 
 const params = {
@@ -61,7 +61,7 @@ const params = {
             "address": "TCAirSsKZy6Z4HuXvYaZGyeksy4iQbQqjt",
             "allowDuplicates": true,
             "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
-            "callbackUrl": process.env.CALLBACK_URL
+            "callbackUrl": process.env.CALLBACK_URL_2
         }
     }
 }
