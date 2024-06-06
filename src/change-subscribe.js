@@ -51,14 +51,14 @@ async function processActiveAccounts() {
 //processActiveAccounts();
 
 
-const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "0168f943-f685-4b00-acbf-b18b067afc4e");
+const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "ef954309-d3e3-4803-a0df-9235fc290044");
 console.log("delResSubscribe", delResSubscribe);
 
 const params = {
     "context": "address-tokens-transactions-confirmed-each-confirmation",
     "data": {
         "item": {
-            "address": "T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet",
+            "address": "TCAirSsKZy6Z4HuXvYaZGyeksy4iQbQqjt",
             "allowDuplicates": true,
             "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
             "callbackUrl": process.env.CALLBACK_URL_2
@@ -67,7 +67,7 @@ const params = {
 };
 
 // Виконання createSubscriptionConfirm асинхронно і чекаємо результат
-const resCreateSubscribe = await createSubscriptionConfirm("T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet", "tron", "mainnet", params);
+const resCreateSubscribe = await createSubscriptionConfirm("TCAirSsKZy6Z4HuXvYaZGyeksy4iQbQqjt", "tron", "mainnet", params);
 console.log("resCreateSubscribe", resCreateSubscribe);
 const referenceId = resCreateSubscribe.data.data.item.referenceId;
 
