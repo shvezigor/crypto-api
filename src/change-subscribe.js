@@ -61,7 +61,7 @@ const params = {
             "address": "TCAirSsKZy6Z4HuXvYaZGyeksy4iQbQqjt",
             "allowDuplicates": true,
             "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
-            "callbackUrl": process.env.CALLBACK_URL_2
+            "callbackUrl": process.env.CALLBACK_URL2
         }
     }
 }
