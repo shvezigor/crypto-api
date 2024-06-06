@@ -52,7 +52,7 @@ async function processActiveAccounts() {
 
 
 const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "c34e2a1e-180b-4e3b-8895-069aebf5f181");
-console.log("delResSubscribe", delResSubscribe);
+console.log("delResSubscribe", delResSubscribe.data);
 
 const params = {
     "context": "address-tokens-transactions-confirmed-each-confirmation",
@@ -66,8 +66,9 @@ const params = {
     }
 }
 
+console.log("params", params);
 // Виконання createSubscriptionConfirm асинхронно і чекаємо результат
 const resCreateSubscribe = await createSubscriptionConfirm("TCAirSsKZy6Z4HuXvYaZGyeksy4iQbQqjt", "tron", "mainnet", params);
-console.log("resCreateSubscribe", resCreateSubscribe);
+console.log("resCreateSubscribe", resCreateSubscribe.data);
 //const referenceId = resCreateSubscribe.data.data.item.referenceId;
 //update("T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet",referenceId);
