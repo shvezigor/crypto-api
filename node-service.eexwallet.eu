@@ -1,7 +1,7 @@
 server {
         listen       80;
 	    listen       443 ssl;
-        server_name  node-service.eexwallet.eu;
+        server_name  node-service.bettertransfer.io;
 
         location / {
             proxy_pass http://localhost:3000;
