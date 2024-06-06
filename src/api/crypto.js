@@ -36,7 +36,7 @@ export const createSubscriptionTokensTransactionsConfirmed = async (blockchain, 
             return response;
         })
         .catch(function (error) {
-            console.log(error);
+            //console.log(error);
             return error;
         });
 }
