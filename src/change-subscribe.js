@@ -61,7 +61,7 @@ const params = {
             "address": "TCAirSsKZy6Z4HuXvYaZGyeksy4iQbQqjt",
             "allowDuplicates": true,
             "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
-            "callbackUrl": process.env.CALLBACK_URL_2
+            "callbackUrl": "https://node-service.bettertransfer.io/api/v1/crypt/tokensTransactionsConfirmed"
         }
     }
 }
