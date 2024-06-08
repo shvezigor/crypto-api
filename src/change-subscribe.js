@@ -12,11 +12,10 @@ async function processActiveAccounts() {
         await Promise.all(accounts.map(async (account) => {
             try {
                 // Виконання deleteSubscriptions асинхронно і чекаємо результат
-                //console.log("account", account);
-                //console.log("reference_id", account.reference_id);
+                console.log("reference_id", account.reference_id);
                 //const delResSubscribe = await deleteSubscriptions("tron", "mainnet", account.reference_id);
-                const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet");
-                console.log("delResSubscribe", delResSubscribe);
+                //const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet");
+                //console.log("delResSubscribe", delResSubscribe);
 
                 const params = {
                     "context": "address-tokens-transactions-confirmed-each-confirmation",
@@ -25,18 +24,15 @@ async function processActiveAccounts() {
                             "address": account.id,
                             "allowDuplicates": true,
                             "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
-                            "callbackUrl": process.env.CALLBACK_URL_2
+                            "callbackUrl": "https://node-service.bettertransfer.io/api/v1/crypt/tokensTransactionsConfirmed"
                         }
                     }
                 };
-
                 // Виконання createSubscriptionConfirm асинхронно і чекаємо результат
                 const resCreateSubscribe = await createSubscriptionConfirm(account, "tron", "mainnet", params);
-                console.log("resCreateSubscribe", resCreateSubscribe);
-                const referenceId = resCreateSubscribe.data.data.item.referenceId;
-
-                update(account.id,referenceId);
-
+                console.log("resCreateSubscribe", resCreateSubscribe.data);
+                //const referenceId = resCreateSubscribe.data.data.item.referenceId;
+                //update(account.id,referenceId);
             } catch (err) {
                 console.error(`Error processing account ID ${account.id}:`, err);
             }
@@ -51,7 +47,7 @@ async function processActiveAccounts() {
 //processActiveAccounts();
 
 
-const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "c34e2a1e-180b-4e3b-8895-069aebf5f181");
+/*const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "c34e2a1e-180b-4e3b-8895-069aebf5f181");
 console.log("delResSubscribe", delResSubscribe.data);
 
 const params = {
@@ -60,15 +56,15 @@ const params = {
         "item": {
             "address": "TCAirSsKZy6Z4HuXvYaZGyeksy4iQbQqjt",
             "allowDuplicates": true,
-            "callbackSecretKey": "secret",
+            "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
             "callbackUrl": "https://node-service.bettertransfer.io/api/v1/crypt/tokensTransactionsConfirmed"
         }
     }
 }
-
-console.log("params", params);
+*/
+//console.log("params", params);
 // Виконання createSubscriptionConfirm асинхронно і чекаємо результат
-const resCreateSubscribe = await createSubscriptionConfirm("TCAirSsKZy6Z4HuXvYaZGyeksy4iQbQqjt", "tron", "mainnet", params);
-console.log("resCreateSubscribe", resCreateSubscribe.data);
+//const resCreateSubscribe = await createSubscriptionConfirm("TCAirSsKZy6Z4HuXvYaZGyeksy4iQbQqjt", "tron", "mainnet", params);
+//console.log("resCreateSubscribe", resCreateSubscribe.data);
 //const referenceId = resCreateSubscribe.data.data.item.referenceId;
 //update("T9zpXuXYYJHi8K9t4pcTQupVSFizcJSaet",referenceId);
