@@ -28,8 +28,9 @@ async function processActiveAccounts() {
                         }
                     }
                 };
+                console.log("params", params);
                 // Виконання createSubscriptionConfirm асинхронно і чекаємо результат
-                const resCreateSubscribe = await createSubscriptionConfirm(account, "tron", "mainnet", params);
+                const resCreateSubscribe = await createSubscriptionConfirm(account.id, "tron", "mainnet", params);
                 console.log("resCreateSubscribe", resCreateSubscribe.data);
                 //const referenceId = resCreateSubscribe.data.data.item.referenceId;
                 //update(account.id,referenceId);

@@ -22,7 +22,7 @@ export const  getExpiredTime = (currentTime) => {
 
 export const selectActiveAccounts = () => {
     return new Promise((resolve, reject) => {
-        conMySql.query(`SELECT * FROM accounts WHERE deleted = 0  LIMIT 20`, (err, result) => {
+        conMySql.query(`SELECT * FROM accounts WHERE deleted = 0  LIMIT 3`, (err, result) => {
             if (err) {
                 reject(err.message);
             } else {
