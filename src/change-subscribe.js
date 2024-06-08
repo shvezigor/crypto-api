@@ -43,8 +43,7 @@ async function processActiveAccounts() {
 }
 
 // Виклик асинхронної функції
-//processActiveAccounts();
-//processActiveAccounts();
+processActiveAccounts();
 
 
 /*const delResSubscribe = await deleteSubscriptions("tron", "mainnet", "c34e2a1e-180b-4e3b-8895-069aebf5f181");
