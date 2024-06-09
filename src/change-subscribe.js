@@ -8,7 +8,7 @@ dotenv.config();
 async function processActiveAccounts() {
     try{
         console.log('Всі параметри:', process.argv);
-        const id = process.argv[1];
+        const id = process.argv[3];
         console.log("id", id);
         //const accounts = await selectActiveAccounts();
         const accounts = await get(id);
