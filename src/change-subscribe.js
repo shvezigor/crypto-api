@@ -1,4 +1,4 @@
- import {selectActiveAccounts, update, updateReferenceById} from "./models/account.js";
+ import {selectActiveAccounts, get } from "./models/account.js";
 import { createSubscriptionConfirm, deleteSubscriptions } from "./api/crypto.js";
 import dotenv from 'dotenv';
 
