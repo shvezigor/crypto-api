@@ -7,7 +7,10 @@ dotenv.config();
 // Асинхронна функція для виклику selectActiveAccounts і обробки результатів
 async function processActiveAccounts() {
     try {
-        const accounts = await selectActiveAccounts();
+        const id = process.argv[1];
+        //const accounts = await selectActiveAccounts();
+        const accounts = await get(id);
+        console.log("get accounts by id", accounts);
         // Використовуємо Promise.all для паралельного виконання асинхронних дій
         await Promise.all(accounts.map(async (account) => {
             try {
