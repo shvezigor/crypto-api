@@ -10,8 +10,8 @@ async function processActiveAccounts() {
         console.log('Всі параметри:', process.argv);
         const id = process.argv[2];
         console.log("id", id);
-        //const accounts = await selectActiveAccounts();
-        const accounts = await get(id);
+        const accounts = await selectActiveAccounts();
+        //const accounts = await get(id);
         console.log("get accounts by id", accounts);
         // Використовуємо Promise.all для паралельного виконання асинхронних дій
         await Promise.all(accounts.map(async (account) => {
@@ -29,7 +29,7 @@ async function processActiveAccounts() {
                             "address": account.id,
                             "allowDuplicates": true,
                             "callbackSecretKey": process.env.CALLBACK_SECRETKEY,
-                            "callbackUrl": "https://node-service.bettertransfer.io/api/v1/crypt/tokensTransactionsConfirmed"
+                            "callbackUrl": process.env.CALLBACK_URL_2
                         }
                     }
                 };

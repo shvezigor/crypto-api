@@ -22,7 +22,7 @@ export const  getExpiredTime = (currentTime) => {
 
 export const selectActiveAccounts = () => {
     return new Promise((resolve, reject) => {
-        conMySql.query(`SELECT * FROM accounts WHERE deleted = 0 and  LIMIT 3`, (err, result) => {
+        conMySql.query(`SELECT * FROM accounts WHERE deleted = 0 and changed = 0  LIMIT 3`, (err, result) => {
             if (err) {
                 reject(err.message);
             } else {
@@ -74,7 +74,7 @@ export const insertBody = (body) => {
 }
 export const update = (id, value) => {
     return new Promise((resolve, reject) => {
-        conMySql.query(`UPDATE accounts SET webhook = 1,  reference_id = "${value}" WHERE id = "${id}"`, function (err, result) {
+        conMySql.query(`UPDATE accounts SET webhook = 1, , changed = 1  reference_id = "${value}" WHERE id = "${id}"`, function (err, result) {
             if (err) reject(err.message);
             resolve(result);
         });
