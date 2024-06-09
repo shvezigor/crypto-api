@@ -6,8 +6,10 @@ dotenv.config();
 
 // Асинхронна функція для виклику selectActiveAccounts і обробки результатів
 async function processActiveAccounts() {
-    try {
+    try{
+        console.log('Всі параметри:', process.argv);
         const id = process.argv[1];
+        console.log("id", id);
         //const accounts = await selectActiveAccounts();
         const accounts = await get(id);
         console.log("get accounts by id", accounts);
