@@ -17,6 +17,7 @@ router.post('/api/v1/crypt/account', creatNewAccount);
 
 router.post('/api/v1/crypt/minedTransaction', minedTransaction);
 router.post('/api/v1/crypt/tokensTransactionsConfirmed', tokensTransactionsConfirmed);
+router.post('/api/v1/crypt/tokensTransactionsEachConfirmed', tokensTransactionsConfirmed);
 
 
 router.post('/api/v1/crypt/deletedTransaction', deleteSubscribeByAccount);
